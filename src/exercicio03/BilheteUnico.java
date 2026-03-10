@@ -8,10 +8,10 @@ public class BilheteUnico {
     String nomeUsuario;
     double saldo;
     static double tarifa= 5.40;
-    String tipoTarifa;
+    int tipoTarifa;
 
 
-    public BilheteUnico(String nomeUsuario, int numBilhete){
+    public BilheteUnico(String nomeUsuario, int tipoTarifa){
         Random r = new Random();
         this.numBilhete = r.nextInt(1000,9999);
         this.nomeUsuario = nomeUsuario;
@@ -27,16 +27,34 @@ public class BilheteUnico {
     }
 
     public void passarNaCatraca(){
+        //VERIFICANDO O TIPO, A CONDIÇÃO E O VALOR COBRADO/RESTANTE DA TARIFA E CATRACA
         double valor = tarifa;
-        if (tipoTarifa.equalsIgnoreCase("estudante") ||
-                      tipoTarifa.equalsIgnoreCase("professor")){
-            valor = valor / 2;
-        }
+        if (tipoTarifa==1){
+            if (saldo >= valor/2){
+                saldo -= valor / 2;
+                System.out.printf("Saldo restante: R$%.2f", saldo);
+            }else {
+                System.out.printf("Saldo insuficiente!");
+            }
+        } else if (tipoTarifa == 2) {
+            if (saldo >= valor/2) {
+                saldo -= valor;
+                System.out.printf("Saldo restante: R$%.2f", saldo);
+            }else {
+                System.out.printf("Saldo insuficiente!");
+            }
+        } else {
+            if (saldo >= valor) {
+                saldo -= valor;
+                System.out.printf("Saldo restante: R$%.2f", saldo);
+            }else {
+                System.out.printf("Saldo insuficiente!");
+            }
 
-        if (saldo < valor) {
-            return;
         }
     }
+
+
 
 
 
